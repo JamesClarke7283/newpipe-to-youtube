@@ -1,41 +1,47 @@
-# Introduction
+# NewPipe to YouTube Subscriptions Transfer
 
-# Get the subscriptions from newpipe
-1. Navigate to your Subscriptions
-2. Click the virtical 3 dot button. 
-3. Click Export to
-4. Save your subscriptions file
+## Introduction
 
-# Get the Credentials File
+This command-line application is designed to transfer your video channel subscriptions from NewPipe to your YouTube account. NewPipe is a libre software YouTube client that you may use on Android. While NewPipe is awesome, sometimes you might want to sync your subscriptions back to your main YouTube account. This Python-based tool makes the process a breeze.
 
-Google Developer Console: Navigate to the Google Developer Console.
+## Get the Subscriptions from NewPipe
 
-Create Project: If you don't already have a project, create a new one by clicking the "Select a project" dropdown at the top-right, then click on "New Project", and follow the prompts.
+1. Open the NewPipe app on your Android device.
+2. Navigate to your Subscriptions tab.
+3. Click the vertical 3-dot button usually located at the top-right corner.
+4. Choose "Export to" from the dropdown.
+5. Save your subscriptions file. It will be in JSON format.
 
-Enable API: Once you're in the project dashboard, click on "Dashboard" in the left sidebar, then click on "+ ENABLE APIS AND SERVICES". Search for "YouTube Data API v3" and enable it.
+## Get the Credentials File
 
-Create Credentials: After enabling the API, you'll be taken to the API page. Click on "Create credentials" at the top. Here, you'll be asked a series of questions:
+### Google Developer Console
 
-Which API are you using?: YouTube Data API v3
-Where will you be calling the API from?: Desktop app
-What data will you be accessing?: User data
-Click "What credentials do I need?" after answering these.
+1. Navigate to the [Google Developer Console](https://console.developers.google.com/).
+2. **Create Project**: If you don't already have a project, create a new one by clicking the "Select a project" dropdown at the top-right, then click on "New Project", and follow the prompts.
+3. **Enable API**: Once you're in the project dashboard, click on "Dashboard" in the left sidebar, then click on "+ ENABLE APIS AND SERVICES". Search for "YouTube Data API v3" and enable it.
+4. **Create Credentials**: After enabling the API, you'll be taken to the API page. Click on "Create credentials" at the top.
 
-OAuth 2.0 Client ID: Create an OAuth 2.0 client ID. You can name it whatever you want. You'll be prompted to configure the OAuth consent screen. For the purposes of a personal project, you can use the "External" user type. Fill in the necessary details. You can skip optional fields.
+    - **Which API are you using?**: YouTube Data API v3
+    - **Where will you be calling the API from?**: Desktop app
+    - **What data will you be accessing?**: User data
+    
+    Click "What credentials do I need?" after answering these questions.
 
-Download Credentials: Once the OAuth client ID is created, you'll see a download button (it looks like a down arrow). Click that to download your credentials.json file.
+5. **OAuth 2.0 Client ID**: Create an OAuth 2.0 client ID. You'll be prompted to configure the OAuth consent screen. For the purposes of a personal project, you can use the "External" user type. Fill in the necessary details. You can skip optional fields.
+6. **Download Credentials**: Once the OAuth client ID is created, you'll see a download button (it looks like a down arrow). Click that to download your `credentials.json` file.
+7. **Place in Directory**: Place this downloaded `credentials.json` in the same directory as your Python script.
 
-Place in Directory: Place this downloaded credentials.json in the same directory as your Python script.
+## Usage
 
-That's it! Now you should be able to run the Python script to authenticate against the YouTube Data API v3 using these credentials. Let me know if you have more questions!
+To use the application, follow these steps:
 
-# Usage
 ```bash
 git clone [URL]
 cd newpipe-to-youtube
 python3 -m venv .venv
+source .venv/bin/activate  # On Windows, use `.venv\Scripts\activate`
 python3 -m pip install -r requirements.txt
 python3 main.py /path/to/subscriptions/file.json
 ```
 
-And you should see a popup in your browser asking to sign into your user. Sign into the account you want your subscriptions imported to. And you should be good to go!
+After running the last command, a popup should appear in your browser asking you to sign into your Google account. Sign into the account where you want your subscriptions to be imported. Once authenticated, the script will automatically start the subscription process.
